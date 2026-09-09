@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulir Pendaftaran</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+    button { background-color: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+    button:disabled { background-color: #cccccc; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+  <h2>Formulir Pendaftaran</h2>
+  
+  <form id="formPendaftaran">
+    <div class="form-group">
+      <label for="nama">Nama Lengkap:</label>
+      <input type="text" id="nama" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Alamat Email:</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="alasan">Motivasi Bergabung:</label>
+      <textarea id="alasan" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" id="btnKirim">Kirim Pendaftaran</button>
+  </form>
+
+  <script>
+    // 1. Ganti URL ini dengan API URL dari SheetDB milik Anda
+    const URL_SHEETDB_ANDA = 'https://sheetdb.io/api/v1/xz775hfumk3vn';
+
+    const form = document.getElementById('formPendaftaran');
+    const btnKirim = document.getElementById('btnKirim');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Ubah status tombol saat memproses
+      btnKirim.disabled = true;
+      btnKirim.textContent = 'Mengirim...';
+
+      // 2. Ambil data dari formulir (Key harus SAMA persis dengan Header Google Sheets)
+      const formData = {
+        data: [
+          {
+            nama: document.getElementById('nama').value,
+            email: document.getElementById('email').value,
+            alasan: document.getElementById('alasan').value
+          }
+        ]
+      };
+
+      try {
+        // 3. Kirim data ke SheetDB via metode POST
+        const response = await fetch(URL_SHEETDB_ANDA, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        // 4. Cek hasil respon dari SheetDB
+        if (response.ok) {
+          alert('Pendaftaran Berhasil! Data Anda telah tersimpan.');
+          form.reset(); // Kosongkan formulir
+        } else {
+          alert('Gagal mengirim data. Silakan coba lagi.');
+          console.error('Error dari SheetDB:', result);
+        }
+      } catch (error) {
+        console.error('Error Jaringan:', error);
+        alert('Terjadi kesalahan koneksi.');
+      } finally {
+        // Kembalikan tombol ke keadaan semula
+        btnKirim.disabled = false;
+        btnKirim.textContent = 'Kirim Pendaftaran';
+      }
+    });
+  </script>
+
+</body>
+</html>
