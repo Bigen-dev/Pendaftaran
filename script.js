@@ -1,4 +1,4 @@
-const URL_SHEETDB_ANDA = 'https://sheetdb.io/api/v1/xz775hfumk3vn';
+const URL_SHEETDB_ANDA = 'https://sheetdb.io/api/v1/kcp9x1kr758hg';
 
 const form = document.getElementById('formPendaftaran');
 const btnKirim = document.getElementById('btnKirim');
