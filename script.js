@@ -20,7 +20,7 @@ form.addEventListener('submit', async function(e) {
   };
 
   try {
-    const response = await fetch('https://sheetdb.io/api/v1/kcp9x1kr758hg', {
+    const response = await fetch(URL_SHEETDB_ANDA, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
