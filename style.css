@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Pembungkus Utama */
+.wrapper {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column; /* Default di HP: Menumpuk ke bawah */
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Bagian Gambar */
+.image-section {
+  flex: 1;
+  background-color: #eef2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+/* Bagian Formulir */
+.form-section {
+  flex: 1;
+  padding: 35px;
+}
+
+h2 {
+  color: #333333;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+}
+
+input, textarea {
+  width: 100%;
+  resize: none;
+  padding: 12px;
+  border: 1.5px solid #ced4da;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+}
+
+button {
+  width: 100%;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* RESPONSIF: Layar Tablet & Laptop (Lebar minimal 768px) */
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row; /* Ubah tampilan jadi berdampingan (Kiri-Kanan) */
+  }
+
+  .image-section img {
+    max-height: 100%; /* Gambar menyesuaikan tinggi form */
+  }
+}
